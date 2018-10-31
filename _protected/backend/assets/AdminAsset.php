@@ -35,9 +35,8 @@ class AdminAsset extends AssetBundle
         'css/style.css',
     ];
     public $js = [
+        'js/loadingoverlay.min.js',
         'js/plugins/gritter/jquery.gritter.css',
-        'js/jquery-2.1.1.js',
-        'js/bootstrap.min.js',
         'js/plugins/metisMenu/jquery.metisMenu.js',
         'js/plugins/slimscroll/jquery.slimscroll.min.js',
         'js/plugins/flot/jquery.flot.js',
@@ -55,6 +54,8 @@ class AdminAsset extends AssetBundle
         'js/demo/sparkline-demo.js',
         'js/plugins/chartJs/Chart.min.js',
         'js/plugins/toastr/toastr.min.js',
+        'js/custom.js',
+
     ];
 
     public $depends = [

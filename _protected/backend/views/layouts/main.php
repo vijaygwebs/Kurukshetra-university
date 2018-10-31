@@ -5,11 +5,14 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
+use yii\web\View;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AdminAsset::register($this);
+$this->registerJs("var current_url = ".json_encode(Yii::$app->request->absoluteUrl).";var controller =".json_encode(Yii::$app->controller->id).";var baseurl = ".json_encode(Yii::$app->request->baseUrl).";", View::POS_END);
+
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -34,8 +37,6 @@ AdminAsset::register($this);
        <?=$this->render('footer');?>
         <?php } ?>
     </div>
-
-
 
     <?php $this->endBody() ?>
 </body>

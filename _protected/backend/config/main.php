@@ -34,6 +34,17 @@ return [
                 ],
             ],
         ],
+        'urlManagerFrontend' => [
+
+            'class' => 'yii\web\urlManager',
+
+            'baseUrl' => '@appRoot/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
+
+            'enablePrettyUrl' => true,
+
+            'showScriptName' => false,
+
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

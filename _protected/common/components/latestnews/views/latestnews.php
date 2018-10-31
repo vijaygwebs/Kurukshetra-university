@@ -10,26 +10,14 @@
                 <div class="content-box">
                     <h2>Latest news</h2>
                     <div class="news-slider owl-carousel owl-theme">
+                        <?php foreach($model as $modeldata){ ?>
                         <div class="item">
-                            <h3>Computer Department celebrated teacher's day on 5th sept.</h3>
-                            <div class="date"><i class="icon-calendar"></i>03-01-2017</div>
-                            <p>Student were asked to write quote at the college entrance and whole college was decorated with various posters. Student were asked to write quote at the college entrance and whole college was decorated with various posters.</p>
+                            <h3><?=$modeldata->title;?></h3>
+                            <div class="date"><i class="icon-calendar"></i><?=$modeldata->published_date;?></div>
+                            <p><?=$modeldata->description;?></p>
                         </div>
-                        <div class="item">
-                            <h3>Computer Department celebrated teacher's day on 5th sept.</h3>
-                            <div class="date"><i class="icon-calendar"></i>03-01-2017</div>
-                            <p>Student were asked to write quote at the college entrance and whole college was decorated with various posters.  the college entrance and whole college was decorated with v</p>
-                        </div>
-                        <div class="item">
-                            <h3>Computer Department celebrated teacher's day on 5th sept.</h3>
-                            <div class="date"><i class="icon-calendar"></i>03-01-2017</div>
-                            <p>Student were asked to write quote at the college entrance and whole college was decorated with various posters.sters. Student were asked to write quote at the colquote at the college entrance</p>
-                        </div>
-                        <div class="item">
-                            <h3>Computer Department celebrated teacher's day on 5th sept.</h3>
-                            <div class="date"><i class="icon-calendar"></i>03-01-2017</div>
-                            <p>Student were asked to write quote at the college entrance and whole college was decorated with various posters. sters. Student were asked to write quote at the college entrance</p>
-                        </div>
+                        <?php } ?>
+
                     </div>
                     <a href="#">View All</a>
                 </div>

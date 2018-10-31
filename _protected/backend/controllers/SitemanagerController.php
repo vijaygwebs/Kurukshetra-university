@@ -28,7 +28,7 @@ class SitemanagerController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','notices'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -67,9 +67,10 @@ class SitemanagerController extends Controller
     {
         return $this->render('index');
     }
-
-    public function actionAction(){
-        return $this->render('slidercategories');
+    public function actionNotices(){
+        return $this->render('notices');
     }
+
+
 
 }
