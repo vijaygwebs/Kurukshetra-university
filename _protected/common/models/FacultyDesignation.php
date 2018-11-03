@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 
@@ -35,6 +35,7 @@ class FacultyDesignation extends \yii\db\ActiveRecord
     {
         return [
             [['faculty_id', 'department_id', 'subject_id', 'designation_id'], 'integer'],
+            [['faculty_id', 'department_id', 'subject_id', 'designation_id'], 'required'],
             [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['department_id' => 'id']],
             [['designation_id'], 'exist', 'skipOnError' => true, 'targetClass' => Designations::className(), 'targetAttribute' => ['designation_id' => 'id']],
             [['faculty_id'], 'exist', 'skipOnError' => true, 'targetClass' => Faculty::className(), 'targetAttribute' => ['faculty_id' => 'id']],

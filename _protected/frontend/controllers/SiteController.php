@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Customsearch;
+use common\models\NewsSearch;
 use common\models\User;
 use common\models\LoginForm;
 use frontend\models\AccountActivation;
@@ -15,6 +17,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
+use common\models\Faculty;
+use yii\data\ActiveDataProvider;
+use yii\web\Response;
 
 /**
  * Site controller.
@@ -423,5 +428,16 @@ class SiteController extends Controller
     }
     public function actionPride(){
         return $this->render('pride');
+    }
+    public function actionSearchresults(){
+
+         $params = Yii::$app->request->get();
+
+        $search =new Customsearch();
+        $searchresults = $search->search($params);
+        return $this->render('searchresults',['dataprovider'=>$searchresults]);
+       //  yii::$app->response->format=Response::FORMAT_JSON;
+
+
     }
 }

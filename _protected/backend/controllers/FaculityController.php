@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use backend\models\Departments;
-use backend\models\Faculty;
-use backend\models\FacultyDesignation;
-use backend\models\Subjects;
+use common\models\Departments;
+use common\models\Faculty;
+use common\models\FacultyDesignation;
+use common\models\Subjects;
 use Yii;
-use backend\models\Designations;
+use common\models\Designations;
 use backend\models\DesignationsSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -15,6 +15,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\data\ActiveDataProvider;
+use yii\base\Model;
+use yii\web\UploadedFile;
 
 /**
  * DesignationsController implements the CRUD actions for Designations model.
@@ -62,15 +64,52 @@ class FaculityController extends Controller
         $subjects = Subjects::find()->all();
         $department = Departments::find()->all();
 
-        if($faculty->load(Yii::$app->request->post()) && $faculty->save())
+        if($faculty->load(yii::$app->request->post() ))
         {
-            $faculty = new Faculty();
-            $faculty_designation->faculty_id = Yii::$app->db->getLastInsertID();
-            if($faculty_designation->load(Yii::$app->request->post()) && $faculty_designation->save()){
-                return $this->redirect('index');
+            if(UploadedFile::getInstance($faculty, 'profile_img')!=''){
+                $faculty->profile_img = UploadedFile::getInstance($faculty, 'profile_img');
+                $faculty->profile_img->saveAs(Yii::getAlias('@upload') . '/avatars/' . $faculty->profile_img->baseName . '.' . $faculty->profile_img->extension);
             }
+           $faculty->save();
+            $faculty_id = Yii::$app->db->getLastInsertID();
+
+
+             $count = count($_POST["FacultyDesignation"]);
+
+            $faculty_designation = [new FacultyDesignation()];
+            for($i = 1; $i < $count; $i++) {
+                $faculty_designation[] = new FacultyDesignation();
+            }
+                //Load and validate the multiple models
+
+/*                foreach($faculty_designation as $f_designation){
+
+
+                    if($f_designation->load(yii::$app->request->post()))
+                   {
+                       echo "<pre>"; print_r($f_designation); die;
+                      // $f_designation->faculty_id = $faculty_id;
+                       //$f_designation->save(false);
+                   }
+
+                }*/
+
+                if (Model::loadMultiple($faculty_designation, Yii::$app->request->post())) {
+
+                    foreach ($faculty_designation as $faculty_designation1) {
+                      // echo "<pre>"; print_r($faculty_designation1);
+                        $faculty_designation1->faculty_id = $faculty_id;
+                        //Try to save the models. Validation is not needed as it's already been done.
+                        if(!$faculty_designation1->save(false)){
+                           echo "<pre>"; print_r($faculty_designation1->getErrors()); die;
+                        }
+
+                    }
+                   return $this->redirect('index');
+                }
 
         }
+
 
         return $this->render('addfaculty',['faculty'=>$faculty,'faculty_designation'=>$faculty_designation,'designations'=>$designations,'department'=>$department,'subjects'=>$subjects]);
     }
@@ -97,6 +136,16 @@ class FaculityController extends Controller
         } else {
             echo "<option>-</option>";
         }
+    }
+    public function actionDeletemember($id){
+    $model = Faculty::findOne($id);
+        $model->delete();
+        return $this->redirect('index');
+    }
+    public function actionDeletememberdetails($id){
+    $model = FacultyDesignation::findOne($id);
+        $model->delete();
+        return $this->redirect('index');
     }
     public function actionUpdate($id){
         return $this->render('update');

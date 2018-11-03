@@ -1,7 +1,7 @@
 <?php
 namespace common\components\bannerslider;
-use backend\models\FrontendSliders;
-use backend\models\Notices;
+use common\models\FrontendSliders;
+use common\models\Notices;
 use backend\models\Slides;
 use yii\base\widget;
 

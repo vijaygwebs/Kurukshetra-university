@@ -1224,3 +1224,6 @@ footer .copy a:hover {
     height: 290px;
   }
 }
+button.submit-btn {
+  border: none;
+}

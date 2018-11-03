@@ -1,6 +1,6 @@
 <?php
 namespace common\components\latestnews;
-use backend\models\News;
+use common\models\News;
 use yii\base\widget;
 
 Class LatestNews extends widget{

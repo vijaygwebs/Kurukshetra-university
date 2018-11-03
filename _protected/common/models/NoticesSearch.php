@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Subjects;
+use common\models\Notices;
 
 /**
- * SubjectsSearch represents the model behind the search form of `backend\models\Subjects`.
+ * NoticesSearch represents the model behind the search form of `backend\models\Notices`.
  */
-class SubjectsSearch extends Subjects
+class NoticesSearch extends Notices
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class SubjectsSearch extends Subjects
     public function rules()
     {
         return [
-            [['id', 'department_id'], 'integer'],
-            [['subject_name'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['notice_title', 'notice_description'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class SubjectsSearch extends Subjects
      */
     public function search($params)
     {
-        $query = Subjects::find();
+        $query = Notices::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +60,11 @@ class SubjectsSearch extends Subjects
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'department_id' => $this->department_id,
+            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'subject_name', $this->subject_name]);
+        $query->andFilterWhere(['like', 'notice_title', $this->notice_title])
+            ->andFilterWhere(['like', 'notice_description', $this->notice_description]);
 
         return $dataProvider;
     }

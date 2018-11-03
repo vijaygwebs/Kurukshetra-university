@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\FrontendSliders;
+use common\models\Subjects;
 
 /**
- * FrontendSlidersSearch represents the model behind the search form of `backend\models\FrontendSliders`.
+ * SubjectsSearch represents the model behind the search form of `backend\models\Subjects`.
  */
-class FrontendSlidersSearch extends FrontendSliders
+class SubjectsSearch extends Subjects
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class FrontendSlidersSearch extends FrontendSliders
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['slider_name'], 'safe'],
+            [['id', 'department_id'], 'integer'],
+            [['subject_name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class FrontendSlidersSearch extends FrontendSliders
      */
     public function search($params)
     {
-        $query = FrontendSliders::find();
+        $query = Subjects::find();
 
         // add conditions that should always apply here
 
@@ -60,9 +60,10 @@ class FrontendSlidersSearch extends FrontendSliders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'department_id' => $this->department_id,
         ]);
 
-        $query->andFilterWhere(['like', 'slider_name', $this->slider_name]);
+        $query->andFilterWhere(['like', 'subject_name', $this->subject_name]);
 
         return $dataProvider;
     }

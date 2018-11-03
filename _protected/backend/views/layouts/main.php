@@ -34,7 +34,7 @@ $this->registerJs("var current_url = ".json_encode(Yii::$app->request->absoluteU
        <?php } ?>
         <?= $content ?>
         <?php if(!yii::$app->user->isGuest){ ?>
-       <?=$this->render('footer');?>
+       <?php //$this->render('footer');?>
         <?php } ?>
     </div>
 

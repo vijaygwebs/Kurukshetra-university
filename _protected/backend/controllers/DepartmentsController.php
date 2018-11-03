@@ -8,7 +8,7 @@ use backend\models\DepartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\Subjects;
+use common\models\Subjects;
 use yii\data\ActiveDataProvider;;
 
 /**

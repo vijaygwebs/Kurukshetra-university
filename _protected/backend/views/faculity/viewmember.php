@@ -34,7 +34,7 @@ use yii\grid\GridView;
                 },
 
                 'deleteslide' => function ($url, $model) {
-                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['#'], [
+                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['deletememberdetails','id'=>$model->id], [
                         'title' => Yii::t('app', 'Delete slide'),
                         'data' => [
                             'confirm' => Yii::t('app', 'Are you sure you want to delete this Slide?'),

@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\url;
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 ?>
 <div class="slide-area">
     <header>
@@ -40,8 +42,12 @@ use yii\helpers\url;
                 <div class="search-box">
                     <div class="search">
                         <a class="close-btn">+</a>
-                        <input type="text">
-                        <button class="btn"><i class="icon-search"></i></button>
+                        <form action="site/searchresults" method="get">
+                            <input type="text" name="s">
+                            <?=Html::submitButton('<i class="icon-search"></i>',['class'=>'submit-btn']);?>
+                        </form>
+
+
                     </div>
                     <a class="btn search-toggle"><i class="icon-search"></i></a>
                     <div class="contact">

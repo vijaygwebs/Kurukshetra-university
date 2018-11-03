@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Notices;
+use common\models\FrontendSliders;
 
 /**
- * NoticesSearch represents the model behind the search form of `backend\models\Notices`.
+ * FrontendSlidersSearch represents the model behind the search form of `backend\models\FrontendSliders`.
  */
-class NoticesSearch extends Notices
+class FrontendSlidersSearch extends FrontendSliders
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class NoticesSearch extends Notices
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['notice_title', 'notice_description'], 'safe'],
+            [['id'], 'integer'],
+            [['slider_name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class NoticesSearch extends Notices
      */
     public function search($params)
     {
-        $query = Notices::find();
+        $query = FrontendSliders::find();
 
         // add conditions that should always apply here
 
@@ -60,11 +60,9 @@ class NoticesSearch extends Notices
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'notice_title', $this->notice_title])
-            ->andFilterWhere(['like', 'notice_description', $this->notice_description]);
+        $query->andFilterWhere(['like', 'slider_name', $this->slider_name]);
 
         return $dataProvider;
     }

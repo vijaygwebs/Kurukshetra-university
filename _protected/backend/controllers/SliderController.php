@@ -4,8 +4,8 @@ namespace backend\controllers;
 
 use backend\models\Slides;
 use Yii;
-use backend\models\FrontendSliders;
-use backend\models\FrontendSlidersSearch;
+use common\models\FrontendSliders;
+use common\models\FrontendSlidersSearch;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -208,9 +208,10 @@ class SliderController extends Controller
     {
         $model = new Slides();
         $model->slider_id =$id;
-        $model->status =1;
+         $model->status =1;
         // $slideid = Slides::find()->where(['slider_id' => $id]);
         if ($model->load(Yii::$app->request->post())) {
+
             if(UploadedFile::getInstance($model, 'image')!='')
             {
                 $model->image = UploadedFile::getInstance($model, 'image');
